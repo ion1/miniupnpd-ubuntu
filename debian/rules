@@ -1,0 +1,22 @@
+#!/usr/bin/make -f
+
+% :
+	dh '$@'
+
+override_dh_auto_configure :
+	$(MAKE) -f Makefile.linux config.h
+	sed -i -r \
+	  -e 's|/\*(#define USE_MINIUPNPDCTL)\*/|\1|' \
+	  config.h
+
+override_dh_auto_build :
+	$(MAKE) -f Makefile.linux
+
+override_dh_install :
+	dh_install
+	chmod 755 debian/miniupnpd/usr/lib/miniupnpd/miniupnpd-helper
+
+override_dh_auto_clean :
+	$(MAKE) -f Makefile.linux clean
+	$(RM) config.h
+

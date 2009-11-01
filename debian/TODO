@@ -1,0 +1,5 @@
+I: miniupnpd: hyphen-used-as-minus-sign usr/share/man/man1/miniupnpd.1.gz:6
+W: miniupnpd: binary-without-manpage usr/sbin/miniupnpdctl
+
+• When linux-libc-dev gains nf_nat.h, add a versioned build-dependency and kill
+  debian/tiny_nf_nat.h.

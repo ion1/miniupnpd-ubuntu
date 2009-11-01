@@ -14,23 +14,19 @@
 #include <arpa/inet.h>
 #include <dlfcn.h>
 #include <libiptc/libiptc.h>
-#include <iptables.h>
+/*#include <iptables.h>*/
 
 #include <linux/version.h>
 
-#if IPTABLES_143
-/* IPTABLES API version >= 1.4.3 */
-#include <net/netfilter/nf_nat.h>
+#include "../debian/tiny_nf_nat.h"
 #define ip_nat_multi_range	nf_nat_multi_range
 #define ip_nat_range		nf_nat_range
+
+#if IPTABLES_143
+/* IPTABLES API version >= 1.4.3 */
 #define IPTC_HANDLE		struct iptc_handle *
 #else
 /* IPTABLES API version < 1.4.3 */
-#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,22)
-#include <linux/netfilter_ipv4/ip_nat.h>
-#else
-#include <linux/netfilter/nf_nat.h>
-#endif
 #define IPTC_HANDLE		iptc_handle_t
 #endif
 
@@ -274,6 +270,9 @@ get_redirect_rule_by_index(int index,
 		{
 			if(i==index)
 			{
+				/* TODO */
+				if (ifname)
+					*ifname = '\0';
 				*proto = e->ip.proto;
 				match = (const struct ipt_entry_match *)&e->elems;
 				if(0 == strncmp(match->u.user.name, "tcp", IPT_FUNCTION_MAXNAMELEN))

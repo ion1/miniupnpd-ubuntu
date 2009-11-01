@@ -1,0 +1,21 @@
+Source: miniupnpd
+Section: net
+Priority: optional
+Maintainer: Johan Kiviniemi <debian@johan.kiviniemi.name>
+Build-Depends: debhelper (>= 7.0.50~), pkg-config, iptables-dev, linux-libc-dev
+Standards-Version: 3.8.4
+Homepage: http://miniupnp.free.fr/
+
+Package: miniupnpd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Lightweight UPnP Internet Gateway Device and NAT-PMP daemon
+ UPnP and NAT-PMP are used to improve internet connectivity for devices behind
+ a NAT router.  Among others, games, IM, VoIP and file-sharing software can
+ benefit from the router supporting UPnP and/or NAT-PMP.
+ .
+ Clients use the UPnP IGD and NAT-PMP protocols to request port redirections.
+ This is a potential security hole.  To be as secure as possible, the daemon
+ supports access control based on client IP addresses and port ranges.  It's
+ also possible to choose whether clients can request port redirections for
+ other computers' IP addresses.

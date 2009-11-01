@@ -1,0 +1,41 @@
+Please configure your firewall script/program to do the following when
+starting:
+
+• Create the required chains and add the required rules for MiniUPnPd. See
+  /usr/share/doc/miniupnpd/examples.
+• Run initctl emit started-firewall.
+
+And the following when stopping:
+
+• Run initctl emit stopping-firewall.
+• Drop the rules and chains created above.
+
+SHOREWALL USERS:
+
+• In /etc/shorewall/interfaces, add the ‘upnp’ option to your external
+  interface.
+
+• In /etc/shorewall/rules, add the following rules to the NEW section:
+
+  # ACTION	SOURCE	DEST	PROTO	...	...	...	...	USER/GR
+  ACCEPT	$FW	loc	all	-	-	-	-	root
+  allowinUPnP	loc	$FW
+  ACCEPT	loc	$FW	udp	5351
+  forwardUPnP	net	loc
+
+• In /etc/shorewall/started, add the following command:
+
+  initctl emit started-firewall
+
+• In /etc/shorewall/stop, add the following command:
+
+  initctl emit stopping-firewall
+
+• In /etc/miniupnpd/miniupnpd.conf, configure the following settings:
+
+  port=49152
+  upnp_forward_chain=forwardUPnP
+  upnp_nat_chain=UPnP
+
+ -- Johan Kiviniemi <debian@johan.kiviniemi.name>  Thu, 29 Oct 2009 18:42:47 +0200
+

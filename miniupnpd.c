@@ -1097,7 +1097,9 @@ main(int argc, char * * argv)
 			//syslog(LOG_DEBUG, "sctl!");
 			s = accept(sctl, (struct sockaddr *)&clientname,
 			           &clientnamelen);
+			/* Disabled: sun_path seems to contain random memory.
 			syslog(LOG_DEBUG, "sctl! : '%s'", clientname.sun_path);
+			*/
 			tmp = malloc(sizeof(struct ctlelem));
 			tmp->socket = s;
 			LIST_INSERT_HEAD(&ctllisthead, tmp, entries);

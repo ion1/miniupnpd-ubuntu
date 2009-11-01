@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+purge)
+  rm -f /var/lib/miniupnpd/machine-id
+  rmdir --ignore-fail-on-non-empty -p /var/lib/miniupnpd
+  ;;
+esac
+
+#DEBHELPER#
+
+exit 0
+
+# vim:set et sw=2 sts=2:

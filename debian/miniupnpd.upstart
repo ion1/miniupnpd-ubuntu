@@ -1,0 +1,8 @@
+start on started-firewall
+stop on stopping-firewall
+
+respawn
+exec /usr/lib/miniupnpd/miniupnpd-helper run
+
+pre-start exec /usr/lib/miniupnpd/miniupnpd-helper flush
+post-stop exec /usr/lib/miniupnpd/miniupnpd-helper flush

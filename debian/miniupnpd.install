@@ -1,0 +1,4 @@
+miniupnpd usr/sbin
+miniupnpdctl usr/sbin
+debian/miniupnpd-helper usr/lib/miniupnpd
+miniupnpd.conf etc/miniupnpd

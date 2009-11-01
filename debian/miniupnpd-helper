@@ -1,0 +1,92 @@
+#!/bin/sh
+set -e
+
+conf_file=/etc/miniupnpd/miniupnpd.conf
+uuid_file=/var/lib/miniupnpd/machine-id
+
+usage() {
+  cat <<E
+USAGE: $0 arg [run-args]
+
+Arguments:
+flush     Flush the UPnP tables.
+gen-uuid  Generate UUID file if it doesn't exist.
+run       Call gen-uuid and run MiniUPnPd with the proper arguments.
+
+E
+}
+
+# Note that the key arg is a sed regexp.
+get_conf_value() {
+  local key="$1"; shift
+
+  local default=
+  local have_default=false
+
+  if [ "$#" -gt 0 ]; then
+    default="$1"; shift
+    have_default=true
+  fi
+
+  local value="$(
+    sed -nre 's/^\s*'"$key"'\s*=\s*([^#]*)(#.*)?$/\1/p' "$conf_file"
+  )"
+
+  if [ -n "$value" ]; then
+    printf "%s\n" "$value"
+  else
+    if "$have_default"; then
+      printf "%s\n" "$default"
+    else
+      return 1
+    fi
+  fi
+}
+
+flush() {
+  local forward_chain="$(get_conf_value upnp_forward_chain MINIUPNPD)"
+  local nat_chain="$(get_conf_value upnp_nat_chain MINIUPNPD)"
+
+  /sbin/iptables -t filter -F "$forward_chain" || :
+  /sbin/iptables -t nat -F "$nat_chain" || :
+}
+
+gen_uuid() {
+  local uuid_file_new="$uuid_file.temp.$$"
+
+  if ! [ -e "$uuid_file" ]; then
+    install -d "$(dirname "$uuid_file")"
+
+    if ! (cat /proc/sys/kernel/random/uuid >"$uuid_file_new" && \
+          mv "$uuid_file_new" "$uuid_file"); then
+      rm -f "$uuid_file_new"
+      return 1
+    fi
+  fi
+}
+
+run() {
+  gen_uuid
+
+  exec /usr/sbin/miniupnpd "$@" -u "$(cat "$uuid_file")" -f "$conf_file" -d
+}
+
+if [ "$#" -eq 0 ]; then
+  >&2 usage
+  exit 1
+fi
+
+arg="$1"; shift
+
+case "$arg" in
+flush)    flush ;;
+gen-uuid) gen_uuid ;;
+run)      run "$@" ;;
+*)
+  >&2 printf "Invalid argument '%s'\n\n" "$arg"
+  >&2 usage
+  exit 1
+  ;;
+esac
+
+# vim:set et sw=2 sts=2:

@@ -1,0 +1,5 @@
+version=3
+
+opts=filenamemangle=s/.*=(.*)/$1/,uversionmangle=s/.*-package.*/0~/;s/[.-]RC([0-9]+)$/~rc$1/;s/[.-]?pre([0-9]{8})$/~$1/;s/[.-]([0-9]{8})$/+$1/ \
+  http://miniupnp.free.fr/files/ \
+  download\.php\?file=miniupnpd-([0-9]+\..+)\.tar\.gz
