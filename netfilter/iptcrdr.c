@@ -359,6 +359,9 @@ get_redirect_rule_by_index(int index,
 		{
 			if(i==index)
 			{
+				/* TODO */
+				if (ifname)
+					*ifname = '\0';
 				*proto = e->ip.proto;
 				match = (const struct ipt_entry_match *)&e->elems;
 				if(0 == strncmp(match->u.user.name, "tcp", IPT_FUNCTION_MAXNAMELEN))
