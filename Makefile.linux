@@ -26,6 +26,9 @@ STRIP ?= strip
 CP = cp
 
 
+CFLAGS += -g
+LDFLAGS += -Wl,--as-needed
+
 INSTALLPREFIX ?= $(PREFIX)/usr
 SBININSTALLDIR = $(INSTALLPREFIX)/sbin
 ETCINSTALLDIR = $(PREFIX)/etc/miniupnpd
