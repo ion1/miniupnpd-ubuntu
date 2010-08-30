@@ -23,6 +23,9 @@ RM = rm -f
 INSTALL = install
 STRIP = strip
 
+CFLAGS += -g
+LDFLAGS += -Wl,--as-needed
+
 INSTALLPREFIX ?= $(PREFIX)/usr
 SBININSTALLDIR = $(INSTALLPREFIX)/sbin
 ETCINSTALLDIR = $(PREFIX)/etc/miniupnpd
