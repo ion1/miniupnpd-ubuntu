@@ -1,0 +1,26 @@
+From 89b8576490616577fcdb76bc13cc162cfc6982ea Mon Sep 17 00:00:00 2001
+From: Johan Kiviniemi <devel@johan.kiviniemi.name>
+Date: Tue, 31 Aug 2010 01:19:54 +0300
+Subject: netfilter/iptcrdr.c: Initialize ifname in get_redirect_rule_by_index
+
+---
+ netfilter/iptcrdr.c |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
+
+diff --git a/netfilter/iptcrdr.c b/netfilter/iptcrdr.c
+index 56b5cc6..04eda5c 100644
+--- a/netfilter/iptcrdr.c
++++ b/netfilter/iptcrdr.c
+@@ -270,6 +270,9 @@ get_redirect_rule_by_index(int index,
+ 		{
+ 			if(i==index)
+ 			{
++				/* TODO */
++				if (ifname)
++					*ifname = '\0';
+ 				*proto = e->ip.proto;
+ 				match = (const struct ipt_entry_match *)&e->elems;
+ 				if(0 == strncmp(match->u.user.name, "tcp", IPT_FUNCTION_MAXNAMELEN))
+-- 
+1.6.3.3
+

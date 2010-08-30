@@ -1,0 +1,114 @@
+From 39f04290a3379b516968a3ccc8b83f04ccb9abb6 Mon Sep 17 00:00:00 2001
+From: Johan Kiviniemi <devel@johan.kiviniemi.name>
+Date: Tue, 31 Aug 2010 01:12:37 +0300
+Subject: miniupnpd.conf: Various changes to the defaults
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+• Do not set ext_ifname=xl1
+• Do not set a default listening_ip
+• Do not set lease_file
+• secure_mode=yes by default
+• Drop pf-related lines
+• Do not set uuid, that’s done by miniupnpd-helper in runtime
+• Deny everything by default
+---
+ miniupnpd.conf |   45 +++++++++++----------------------------------
+ 1 files changed, 11 insertions(+), 34 deletions(-)
+
+diff --git a/miniupnpd.conf b/miniupnpd.conf
+index fe8be69..6ba2ba0 100644
+--- a/miniupnpd.conf
++++ b/miniupnpd.conf
+@@ -1,6 +1,6 @@
+ # WAN network interface
+ #ext_ifname=eth0
+-ext_ifname=xl1
++
+ # if the WAN interface has several IP addresses, you
+ # can specify the one to use below
+ #ext_ip=
+@@ -9,12 +9,9 @@ ext_ifname=xl1
+ # there can be multiple listening ips for SSDP traffic.
+ # should be under the form nnn.nnn.nnn.nnn/nn
+ # HTTP is available on all interfaces
+-# When MULTIPLE_EXTERNAL_IP is enabled, the external ip
+-# address associated with the subnet follows. for example :
+-#  listening_ip=192.168.0.1/24 88.22.44.13
+-listening_ip=192.168.0.1/24
+-listening_ip=192.168.1.1/24
+-#listening_ip=
++#listening_ip=192.168.0.1/24
++#listening_ip=192.168.1.1/24
++
+ # port for HTTP (descriptions and SOAP) traffic. set 0 for autoselect.
+ port=0
+ 
+@@ -34,17 +31,14 @@ enable_upnp=yes
+ #upnp_forward_chain=forwardUPnP
+ #upnp_nat_chain=UPnP
+ 
+-# lease file location
+-#lease_file=/var/log/upnp.leases
+-
+ # bitrates reported by daemon in bits per second
+ bitrate_up=1000000
+ bitrate_down=10000000
+ 
+ # "secure" mode : when enabled, UPnP client are allowed to add mappings only
+ # to their IP.
+-#secure_mode=yes
+-secure_mode=no
++secure_mode=yes
++#secure_mode=no
+ 
+ # default presentation url is http address on port 80
+ # If set to an empty string, no presentationURL element will appear
+@@ -63,28 +57,11 @@ notify_interval=60
+ # never remove any rule before this threshold for the number
+ # of redirections is exceeded. default to 20
+ #clean_ruleset_threshold=10
++
+ # clean process work interval in seconds. default to 0 (disabled).
+ # a 600 seconds (10 minutes) interval makes sense
+ clean_ruleset_interval=600
+ 
+-# log packets in pf
+-#packet_log=no
+-
+-# ALTQ queue in pf
+-# filter rules must be used for this to be used.
+-# compile with PF_ENABLE_FILTER_RULES (see config.h file)
+-#queue=queue_name1
+-
+-# tag name in pf
+-#tag=tag_name1
+-
+-# make filter rules in pf quick or not. default is yes
+-# active when compiled with PF_ENABLE_FILTER_RULES (see config.h file)
+-#quickrules=no
+-
+-# uuid : generate your own with "make genuuid"
+-uuid=fc4ec57e-b051-11db-88f8-0060085db3f6
+-
+ # serial and model number the daemon will report to clients
+ # in its XML description
+ serial=12345678
+@@ -97,9 +74,9 @@ model_number=1
+ # ip/mask format must be nn.nn.nn.nn/nn
+ # it is advised to only allow redirection of port above 1024
+ # and to finish the rule set with "deny 0-65535 0.0.0.0/0 0-65535"
+-allow 1024-65535 192.168.0.0/24 1024-65535
+-allow 1024-65535 192.168.1.0/24 1024-65535
+-allow 1024-65535 192.168.0.0/23 22
+-allow 12345 192.168.7.113/32 54321
++#allow 1024-65535 192.168.0.0/24 1024-65535
++#allow 1024-65535 192.168.1.0/24 1024-65535
++#allow 1024-65535 192.168.0.0/23 22
++#allow 12345 192.168.7.113/32 54321
+ deny 0-65535 0.0.0.0/0 0-65535
+ 
+-- 
+1.6.3.3
+

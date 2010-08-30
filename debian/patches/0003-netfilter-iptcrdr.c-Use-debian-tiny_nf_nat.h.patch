@@ -1,0 +1,45 @@
+From 0b16047e2dd332435dea6f9ff952dcfa5e681cef Mon Sep 17 00:00:00 2001
+From: Johan Kiviniemi <devel@johan.kiviniemi.name>
+Date: Tue, 31 Aug 2010 01:16:59 +0300
+Subject: netfilter/iptcrdr.c: Use debian/tiny_nf_nat.h
+
+---
+ netfilter/iptcrdr.c |   14 +++++---------
+ 1 files changed, 5 insertions(+), 9 deletions(-)
+
+diff --git a/netfilter/iptcrdr.c b/netfilter/iptcrdr.c
+index a527458..56b5cc6 100644
+--- a/netfilter/iptcrdr.c
++++ b/netfilter/iptcrdr.c
+@@ -14,23 +14,19 @@
+ #include <arpa/inet.h>
+ #include <dlfcn.h>
+ #include <libiptc/libiptc.h>
+-#include <iptables.h>
++/*#include <iptables.h>*/
+ 
+ #include <linux/version.h>
+ 
+-#if IPTABLES_143
+-/* IPTABLES API version >= 1.4.3 */
+-#include <net/netfilter/nf_nat.h>
++#include "../debian/tiny_nf_nat.h"
+ #define ip_nat_multi_range	nf_nat_multi_range
+ #define ip_nat_range		nf_nat_range
++
++#if IPTABLES_143
++/* IPTABLES API version >= 1.4.3 */
+ #define IPTC_HANDLE		struct iptc_handle *
+ #else
+ /* IPTABLES API version < 1.4.3 */
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,22)
+-#include <linux/netfilter_ipv4/ip_nat.h>
+-#else
+-#include <linux/netfilter/nf_nat.h>
+-#endif
+ #define IPTC_HANDLE		iptc_handle_t
+ #endif
+ 
+-- 
+1.6.3.3
+
