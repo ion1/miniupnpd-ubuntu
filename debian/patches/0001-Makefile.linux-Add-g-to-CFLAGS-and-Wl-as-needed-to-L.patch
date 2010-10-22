@@ -1,4 +1,4 @@
-From 51614b2e2a8c6345cbd461bd458afdc8672fce1e Mon Sep 17 00:00:00 2001
+From 022afb4ddfb564f22c8b01975be1bb49503068b0 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:08:15 +0300
 Subject: Makefile.linux: Add -g to CFLAGS and -Wl,--as-needed to LDFLAGS
@@ -8,7 +8,7 @@ Subject: Makefile.linux: Add -g to CFLAGS and -Wl,--as-needed to LDFLAGS
  1 files changed, 3 insertions(+), 0 deletions(-)
 
 diff --git a/Makefile.linux b/Makefile.linux
-index 060aad6..9a025b5 100644
+index dfd0546..fdb6602 100644
 --- a/Makefile.linux
 +++ b/Makefile.linux
 @@ -23,6 +23,9 @@ RM = rm -f

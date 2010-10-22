@@ -1,4 +1,4 @@
-From 89b8576490616577fcdb76bc13cc162cfc6982ea Mon Sep 17 00:00:00 2001
+From c2db789e468b9b32d3beb6e8a15d59d13a3feba6 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:19:54 +0300
 Subject: netfilter/iptcrdr.c: Initialize ifname in get_redirect_rule_by_index

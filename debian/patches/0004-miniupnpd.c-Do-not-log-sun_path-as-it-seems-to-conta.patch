@@ -1,4 +1,4 @@
-From d58aa960447c676a917e181b45839761dfe2e6e7 Mon Sep 17 00:00:00 2001
+From 3902d1a7f20c2b96dbb9aa371c2eefe1c98046d5 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:11:44 +0300
 Subject: miniupnpd.c: Do not log sun_path, as it seems to contain random memory
@@ -8,10 +8,10 @@ Subject: miniupnpd.c: Do not log sun_path, as it seems to contain random memory
  1 files changed, 2 insertions(+), 0 deletions(-)
 
 diff --git a/miniupnpd.c b/miniupnpd.c
-index 943ceea..2f64558 100644
+index c8675d6..12fd65e 100644
 --- a/miniupnpd.c
 +++ b/miniupnpd.c
-@@ -1142,7 +1142,9 @@ main(int argc, char * * argv)
+@@ -1366,7 +1366,9 @@ main(int argc, char * * argv)
  			//syslog(LOG_DEBUG, "sctl!");
  			s = accept(sctl, (struct sockaddr *)&clientname,
  			           &clientnamelen);

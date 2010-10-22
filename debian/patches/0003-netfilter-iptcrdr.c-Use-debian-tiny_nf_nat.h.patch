@@ -1,4 +1,4 @@
-From 0b16047e2dd332435dea6f9ff952dcfa5e681cef Mon Sep 17 00:00:00 2001
+From 7ac2967bdb6815718ac457278f9b1185f268b397 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:16:59 +0300
 Subject: netfilter/iptcrdr.c: Use debian/tiny_nf_nat.h

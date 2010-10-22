@@ -1,17 +1,17 @@
-From 0fd6e3b21ba545c3c1867a0fa08b287cb9e4d28b Mon Sep 17 00:00:00 2001
+From bf5e9d0540ad65a296b00cca569523e1ae0b11b3 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:10:24 +0300
 Subject: Makefile.linux: Set libiptc-related flags via pkg-config
 
 ---
- Makefile.linux |   53 +++++++++++++++++++++--------------------------------
- 1 files changed, 21 insertions(+), 32 deletions(-)
+ Makefile.linux |   57 ++++++++++++++++++++-----------------------------------
+ 1 files changed, 21 insertions(+), 36 deletions(-)
 
 diff --git a/Makefile.linux b/Makefile.linux
-index 9a025b5..0b9796d 100644
+index fdb6602..5c98101 100644
 --- a/Makefile.linux
 +++ b/Makefile.linux
-@@ -41,38 +41,27 @@ NETFILTEROBJS = netfilter/iptcrdr.o
+@@ -41,42 +41,27 @@ NETFILTEROBJS = netfilter/iptcrdr.o
  
  ALLOBJS = $(BASEOBJS) $(LNXOBJS) $(NETFILTEROBJS)
  
@@ -20,6 +20,7 @@ index 9a025b5..0b9796d 100644
 -# see http://miniupnp.tuxfamily.org/forum/viewtopic.php?p=1618
 -#LIBS = -lip4tc
 -
+-ARCH := $(shell uname -m | grep -q "x86_64" && echo 64)
 -ifdef IPTABLESPATH
 -CFLAGS := $(CFLAGS) -I$(IPTABLESPATH)/include/
 -LDFLAGS := $(LDFLAFGS) -L$(IPTABLESPATH)/libiptc/
@@ -43,8 +44,11 @@ index 9a025b5..0b9796d 100644
 -TEST := $(shell test -f /usr/include/iptables/internal.h && grep -q "\#define IPTABLES_VERSION" /usr/include/iptables/internal.h && echo 1)
 -ifeq ($(TEST), 1)
 -CFLAGS := $(CFLAGS) -DIPTABLES_143
--#LIBS = /usr/lib/libiptc.a
 -LIBS = -liptc
+-TEST_LIB := $(shell test -f /usr/lib$(ARCH)/libiptc.a && echo 1)
+-ifeq ($(TEST_LIB), 1)
+-LIBS = -liptc /usr/lib$(ARCH)/libiptc.a
+-endif
 -endif 
 -endif
 +CFLAGS := $(CFLAGS) $(shell pkg-config --cflags libiptc)
