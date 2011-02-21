@@ -1,6 +1,6 @@
 miniupnpd (1.5+20110221-0~local) UNRELEASED; urgency=low
 
-  * Initial release.
+  * Initial release (Closes: #541979).
 
  -- Johan Kiviniemi <debian@johan.kiviniemi.name>  Mon, 21 Feb 2011 04:20:45 +0200
 
