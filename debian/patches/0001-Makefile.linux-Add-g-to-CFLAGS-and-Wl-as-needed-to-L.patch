@@ -1,4 +1,4 @@
-From 022afb4ddfb564f22c8b01975be1bb49503068b0 Mon Sep 17 00:00:00 2001
+From aaaf12df99b2d86ab42989b6917355e0100f253b Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:08:15 +0300
 Subject: Makefile.linux: Add -g to CFLAGS and -Wl,--as-needed to LDFLAGS

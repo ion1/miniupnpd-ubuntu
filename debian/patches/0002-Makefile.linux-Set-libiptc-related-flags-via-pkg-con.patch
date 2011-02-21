@@ -1,4 +1,4 @@
-From bf5e9d0540ad65a296b00cca569523e1ae0b11b3 Mon Sep 17 00:00:00 2001
+From a1708c377e3f7ca5623231806e890be0f411bd88 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:10:24 +0300
 Subject: Makefile.linux: Set libiptc-related flags via pkg-config

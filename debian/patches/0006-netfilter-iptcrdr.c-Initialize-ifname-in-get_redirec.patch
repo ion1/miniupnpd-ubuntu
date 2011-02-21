@@ -1,4 +1,4 @@
-From c2db789e468b9b32d3beb6e8a15d59d13a3feba6 Mon Sep 17 00:00:00 2001
+From fac787ddeaaabfd8c57766fb451a022df27b98fa Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:19:54 +0300
 Subject: netfilter/iptcrdr.c: Initialize ifname in get_redirect_rule_by_index
@@ -8,10 +8,10 @@ Subject: netfilter/iptcrdr.c: Initialize ifname in get_redirect_rule_by_index
  1 files changed, 3 insertions(+), 0 deletions(-)
 
 diff --git a/netfilter/iptcrdr.c b/netfilter/iptcrdr.c
-index 56b5cc6..04eda5c 100644
+index b846e6f..e5386a4 100644
 --- a/netfilter/iptcrdr.c
 +++ b/netfilter/iptcrdr.c
-@@ -270,6 +270,9 @@ get_redirect_rule_by_index(int index,
+@@ -302,6 +302,9 @@ get_redirect_rule_by_index(int index,
  		{
  			if(i==index)
  			{

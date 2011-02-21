@@ -1,4 +1,4 @@
-From 3902d1a7f20c2b96dbb9aa371c2eefe1c98046d5 Mon Sep 17 00:00:00 2001
+From bedd5c4b80b815029bcbe98dbe66a607bec48476 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:11:44 +0300
 Subject: miniupnpd.c: Do not log sun_path, as it seems to contain random memory

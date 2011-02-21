@@ -1,4 +1,4 @@
-From 7ac2967bdb6815718ac457278f9b1185f268b397 Mon Sep 17 00:00:00 2001
+From 78c6a47496a094832011b24cb5419f2fb1984825 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:16:59 +0300
 Subject: netfilter/iptcrdr.c: Use debian/tiny_nf_nat.h
@@ -8,7 +8,7 @@ Subject: netfilter/iptcrdr.c: Use debian/tiny_nf_nat.h
  1 files changed, 5 insertions(+), 9 deletions(-)
 
 diff --git a/netfilter/iptcrdr.c b/netfilter/iptcrdr.c
-index a527458..56b5cc6 100644
+index 073a013..b846e6f 100644
 --- a/netfilter/iptcrdr.c
 +++ b/netfilter/iptcrdr.c
 @@ -14,23 +14,19 @@
