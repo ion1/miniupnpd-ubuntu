@@ -1,6 +1,5 @@
 0001-Makefile.linux-Add-g-to-CFLAGS-and-Wl-as-needed-to-L.patch
 0002-Makefile.linux-Set-libiptc-related-flags-via-pkg-con.patch
-0003-netfilter-iptcrdr.c-Use-debian-tiny_nf_nat.h.patch
-0004-miniupnpd.c-Do-not-log-sun_path-as-it-seems-to-conta.patch
-0005-miniupnpd.conf-Various-changes-to-the-defaults.patch
-0006-netfilter-iptcrdr.c-Initialize-ifname-in-get_redirec.patch
+0003-miniupnpd.c-Do-not-log-sun_path-as-it-seems-to-conta.patch
+0004-miniupnpd.conf-Various-changes-to-the-defaults.patch
+0005-netfilter-iptcrdr.c-Initialize-ifname-in-get_redirec.patch

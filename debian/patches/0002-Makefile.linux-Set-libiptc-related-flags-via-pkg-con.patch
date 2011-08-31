@@ -1,30 +1,36 @@
-From a1708c377e3f7ca5623231806e890be0f411bd88 Mon Sep 17 00:00:00 2001
+From ffe5b263d1571dcc8a4c2643d1302aa5a30cea3e Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:10:24 +0300
 Subject: Makefile.linux: Set libiptc-related flags via pkg-config
 
 ---
- Makefile.linux |   57 ++++++++++++++++++++-----------------------------------
- 1 files changed, 21 insertions(+), 36 deletions(-)
+ Makefile.linux |   74 ++++++++++++++++----------------------------------------
+ 1 files changed, 21 insertions(+), 53 deletions(-)
 
 diff --git a/Makefile.linux b/Makefile.linux
-index fdb6602..5c98101 100644
+index c4bd65d..94931ff 100644
 --- a/Makefile.linux
 +++ b/Makefile.linux
-@@ -41,42 +41,27 @@ NETFILTEROBJS = netfilter/iptcrdr.o
+@@ -44,59 +44,27 @@ NETFILTEROBJS = netfilter/iptcrdr.o
  
  ALLOBJS = $(BASEOBJS) $(LNXOBJS) $(NETFILTEROBJS)
  
--LIBS = -liptc
+-ifeq "$(wildcard /etc/gentoo-release )" ""
+-LIBS ?= -liptc
+-else # gentoo
 -# the following is better, at least on gentoo with iptables 1.4.6
 -# see http://miniupnp.tuxfamily.org/forum/viewtopic.php?p=1618
--#LIBS = -lip4tc
+-# and http://miniupnp.tuxfamily.org/forum/viewtopic.php?p=2183
+-LIBS ?= -lip4tc
+-CFLAGS := -DIPTABLES_143 $(CFLAGS)
+-endif
 -
--ARCH := $(shell uname -m | grep -q "x86_64" && echo 64)
+-ARCH ?= $(shell uname -m | grep -q "x86_64" && echo 64)
 -ifdef IPTABLESPATH
 -CFLAGS := $(CFLAGS) -I$(IPTABLESPATH)/include/
 -LDFLAGS := $(LDFLAFGS) -L$(IPTABLESPATH)/libiptc/
 -# get iptables version and set IPTABLES_143 macro if needed
+-ifeq ($(TARGET_OPENWRT),)
 -IPTABLESVERSION := $(shell grep "\#define VERSION" $(IPTABLESPATH)/config.h | tr -d \" |cut -d" " -f3 )
 -IPTABLESVERSION1 := $(shell echo $(IPTABLESVERSION) | cut -d. -f1 )
 -IPTABLESVERSION2 := $(shell echo $(IPTABLESVERSION) | cut -d. -f2 )
@@ -34,23 +40,34 @@ index fdb6602..5c98101 100644
 -ifeq ($(TEST), 1)
 -CFLAGS := $(CFLAGS) -DIPTABLES_143
 -# the following sucks, but works
--#LIBS = $(IPTABLESPATH)/libiptc/.libs/libip4tc.o
--LIBS = $(IPTABLESPATH)/libiptc/.libs/libiptc.a
--else
+-LIBS = $(IPTABLESPATH)/libiptc/.libs/libip4tc.o
+-#LIBS = $(IPTABLESPATH)/libiptc/.libs/libiptc.a
+-else # ifeq ($(TEST), 1)
 -LIBS = $(IPTABLESPATH)/libiptc/libiptc.a
--endif
--else
+-endif # ifeq ($(TEST), 1)
+-else # ($(TARGET_OPENWRT),)
+-# openWRT :
 -# check for system-wide iptables files. Test if iptables version >= 1.4.3
+-# the following test has to be verified :
 -TEST := $(shell test -f /usr/include/iptables/internal.h && grep -q "\#define IPTABLES_VERSION" /usr/include/iptables/internal.h && echo 1)
 -ifeq ($(TEST), 1)
 -CFLAGS := $(CFLAGS) -DIPTABLES_143
 -LIBS = -liptc
+-endif  # ($(TEST), 1)
 -TEST_LIB := $(shell test -f /usr/lib$(ARCH)/libiptc.a && echo 1)
 -ifeq ($(TEST_LIB), 1)
 -LIBS = -liptc /usr/lib$(ARCH)/libiptc.a
--endif
--endif 
--endif
+-endif # ($(TEST_LIB), 1)
+-endif # ($(TARGET_OPENWRT),)
+-else # ifdef IPTABLESPATH
+-# IPTABLESPATH not defined
+-# the following test has to be verified :
+-TEST := $(shell test -f /usr/include/xtables.h && grep -q "XTABLES_VERSION_CODE" /usr/include/xtables.h && echo 1)
+-ifeq ($(TEST), 1)
+-CFLAGS := $(CFLAGS) -DIPTABLES_143
+-LIBS = -liptc
+-endif # ($(TEST), 1)
+-endif # ifdef IPTABLESPATH
 +CFLAGS := $(CFLAGS) $(shell pkg-config --cflags libiptc)
 +LDLIBS := $(LDLIBS) $(shell pkg-config --libs libiptc)
 +CFLAGS := $(CFLAGS) $(shell \
@@ -76,5 +93,5 @@ index fdb6602..5c98101 100644
  TESTUPNPDESCGENOBJS = testupnpdescgen.o upnpdescgen.o
  
 -- 
-1.6.3.3
+1.7.4.1
 

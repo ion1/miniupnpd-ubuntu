@@ -1,4 +1,4 @@
-From aaaf12df99b2d86ab42989b6917355e0100f253b Mon Sep 17 00:00:00 2001
+From e91ebc6e5e8993a08006b77e9b0e6c448562c982 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:08:15 +0300
 Subject: Makefile.linux: Add -g to CFLAGS and -Wl,--as-needed to LDFLAGS
@@ -8,12 +8,12 @@ Subject: Makefile.linux: Add -g to CFLAGS and -Wl,--as-needed to LDFLAGS
  1 files changed, 3 insertions(+), 0 deletions(-)
 
 diff --git a/Makefile.linux b/Makefile.linux
-index dfd0546..fdb6602 100644
+index 28c3b18..c4bd65d 100644
 --- a/Makefile.linux
 +++ b/Makefile.linux
-@@ -23,6 +23,9 @@ RM = rm -f
- INSTALL = install
- STRIP = strip
+@@ -26,6 +26,9 @@ STRIP ?= strip
+ CP = cp
+ 
  
 +CFLAGS += -g
 +LDFLAGS += -Wl,--as-needed
@@ -22,5 +22,5 @@ index dfd0546..fdb6602 100644
  SBININSTALLDIR = $(INSTALLPREFIX)/sbin
  ETCINSTALLDIR = $(PREFIX)/etc/miniupnpd
 -- 
-1.6.3.3
+1.7.4.1
 

@@ -1,9 +1,9 @@
-From b7255ab4b857e448bb0312fac65031abc6d0d161 Mon Sep 17 00:00:00 2001
+From c6528ac3e180ccbbc75a5454199ac62031784017 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:12:37 +0300
 Subject: miniupnpd.conf: Various changes to the defaults
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 • Do not set ext_ifname=xl1
@@ -110,5 +110,5 @@ index fe8be69..6ba2ba0 100644
  deny 0-65535 0.0.0.0/0 0-65535
  
 -- 
-1.6.3.3
+1.7.4.1
 

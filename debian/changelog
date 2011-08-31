@@ -1,6 +1,5 @@
-miniupnpd (1.5+20110221-0~local) UNRELEASED; urgency=low
+miniupnpd (1.6+20110730-0~local) UNRELEASED; urgency=low
 
   * Initial release (Closes: #541979).
 
- -- Johan Kiviniemi <debian@johan.kiviniemi.name>  Mon, 21 Feb 2011 04:20:45 +0200
-
+ -- Johan Kiviniemi <debian@johan.kiviniemi.name>  Wed, 31 Aug 2011 05:15:56 +0300
