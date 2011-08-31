@@ -3,7 +3,7 @@ Section: net
 Priority: optional
 Maintainer: Johan Kiviniemi <debian@johan.kiviniemi.name>
 Build-Depends: debhelper (>= 7.0.50~), pkg-config, iptables-dev, linux-libc-dev
-Standards-Version: 3.8.4
+Standards-Version: 3.9.1
 Homepage: http://miniupnp.free.fr/
 
 Package: miniupnpd
