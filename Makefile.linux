@@ -45,7 +45,9 @@ NETFILTEROBJS = netfilter/iptcrdr.o
 ALLOBJS = $(BASEOBJS) $(LNXOBJS) $(NETFILTEROBJS)
 
 CFLAGS := $(CFLAGS) $(shell pkg-config --cflags libiptc)
-LDLIBS := $(LDLIBS) $(shell pkg-config --libs libiptc)
+# NOTE: --static seems to be needed because miniupnpd uses the private
+# libip4tc.so.
+LDLIBS := $(LDLIBS) $(shell pkg-config --static --libs libiptc)
 CFLAGS := $(CFLAGS) $(shell \
 	ver() { \
 		local old_IFS="$$IFS"; \

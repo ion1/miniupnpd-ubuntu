@@ -1,4 +1,4 @@
-From c6528ac3e180ccbbc75a5454199ac62031784017 Mon Sep 17 00:00:00 2001
+From 9ed88e603efd9f96b3bce19cf053fd16a895bad0 Mon Sep 17 00:00:00 2001
 From: Johan Kiviniemi <devel@johan.kiviniemi.name>
 Date: Tue, 31 Aug 2010 01:12:37 +0300
 Subject: miniupnpd.conf: Various changes to the defaults
